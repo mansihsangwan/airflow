@@ -63,6 +63,26 @@ def example_bash_decorator():
     @task.bash
     def this_will_skip() -> str:
         return 'echo "hello world"; exit 99;'
+    
+    @task.bash
+    def also_run_this() -> str:
+        return 'echo "ti_key={{ task_instance_key_str }}"'
+
+    also_this = also_run_this()
+    # [END howto_decorator_bash_template]
+
+    # [START howto_decorator_bash_context_vars]
+    @task.bash
+    def also_run_this_again(task_instance_key_str) -> str:
+        return f'echo "ti_key={task_instance_key_str}"'
+
+    also_this_again = also_run_this_again()
+    # [END howto_decorator_bash_context_vars]
+
+    # [START howto_decorator_bash_skip]
+    @task.bash
+    def this_will_skip() -> str:
+        return 'echo "hello world"; exit 99;'
 
     this_skips = this_will_skip()
     # [END howto_decorator_bash_skip]

@@ -49,6 +49,20 @@ class SumItOperator(BaseOperator):
         total = sum(self.values)
         print(f"Total was {total}")
         return total
+    
+class SumItOperator(BaseOperator):
+    """A custom operator that sums the input."""
+
+    template_fields = ("values",)
+
+    def __init__(self, values, **kwargs):
+        super().__init__(**kwargs)
+        self.values = values
+
+    def execute(self, context):
+        total = sum(self.values)
+        print(f"Total was {total}")
+        return total
 
 
 with DAG(

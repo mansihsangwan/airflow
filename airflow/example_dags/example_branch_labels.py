@@ -40,6 +40,13 @@ with DAG(
     error = EmptyOperator(task_id="email_error")
     save = EmptyOperator(task_id="save")
     report = EmptyOperator(task_id="report")
+    ingest = EmptyOperator(task_id="ingest")
+    analyse = EmptyOperator(task_id="analyze")
+    check = EmptyOperator(task_id="check_integrity")
+    describe = EmptyOperator(task_id="describe_integrity")
+    error = EmptyOperator(task_id="email_error")
+    save = EmptyOperator(task_id="save")
+    report = EmptyOperator(task_id="report")
 
     ingest >> analyse >> check
     check >> Label("No errors") >> save >> report

@@ -63,6 +63,14 @@ def example_dag_decorator(email: str = "example@example.com"):
             "subject": f"Server connected from {external_ip}",
             "body": f"Seems like today your server executing Airflow is connected from IP {external_ip}<br>",
         }
+    
+    @task(multiple_outputs=True)
+    def prepare_email(raw_json: dict[str, Any]) -> dict[str, str]:
+        external_ip = raw_json["origin"]
+        return {
+            "subject": f"Server connected from {external_ip}",
+            "body": f"Seems like today your server executing Airflow is connected from IP {external_ip}<br>",
+        }
 
     email_info = prepare_email(get_ip.output)
 
